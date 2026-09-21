@@ -44,16 +44,7 @@ function weatherAlerts(d){
 }
 async function loadWeather(){
   if(!navigator.geolocation){weather={status:'error',data:null,error:'La localisation n’est pas disponible sur cet appareil.'};return render();}
-  weather={...weather,status:'loading',error:null};async function bootstrap(){
-  try{
-    const dbState=await loadGardenState();
-    if(dbState&&Array.isArray(dbState.plants)){state=dbState;}
-    else await saveGardenState(state);
-  }catch(e){console.warn('Stockage IndexedDB indisponible, utilisation du stockage local.',e);}
-  render();
-  if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
-}
-bootstrap();
+  weather={...weather,status:'loading',error:null};render();
   navigator.geolocation.getCurrentPosition(async pos=>{
     try{
       const {latitude,longitude}=pos.coords;
@@ -94,4 +85,13 @@ function done(id){const t=state.tasks.find(x=>x.id===id);t.status='done';state.h
 function ignore(id){const t=state.tasks.find(x=>x.id===id);t.status='ignored';save();toast('Rappel ignoré.');render()}
 function postpone(id){const n=prompt('Reporter de combien de jours ? (1, 3 ou 7)','1');if(!n)return;const t=state.tasks.find(x=>x.id===id),d=new Date(t.date+'T12:00');d.setDate(d.getDate()+Number(n));t.date=d.toISOString().slice(0,10);save();toast(`Rappel reporté de ${n} jour(s).`);render()}
 async function importBackup(e){try{const data=JSON.parse(await e.target.files[0].text());if(!Array.isArray(data.plants)||!Array.isArray(data.tasks))throw Error();if(confirm('Remplacer toutes les données actuelles ?')){state=data;save();toast('Sauvegarde restaurée.');render()}}catch{alert('Ce fichier de sauvegarde n’est pas valide.')}}
-render();
+async function bootstrap(){
+  try{
+    const dbState=await loadGardenState();
+    if(dbState&&Array.isArray(dbState.plants)){state=dbState;}
+    else await saveGardenState(state);
+  }catch(e){console.warn('Stockage IndexedDB indisponible, utilisation du stockage local.',e);}
+  render();
+  if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+bootstrap();
