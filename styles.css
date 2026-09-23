@@ -15,3 +15,29 @@
 .weather-alert.heat{background:#fff2e8;color:#9c5425}
 .weather-ok{background:var(--mint);color:var(--forest);padding:11px 13px;border-radius:10px;font-size:13px}
 @media(max-width:560px){.weather-main{align-items:flex-start;flex-direction:column;gap:4px}.weather-main strong{font-size:36px}}
+
+.field-help{font-size:11px;color:var(--muted)}
+.forecast-strip{display:grid;grid-template-columns:repeat(7,minmax(82px,1fr));gap:8px;margin:14px 0 18px;overflow-x:auto;padding-bottom:4px}
+.forecast-day{min-width:82px;background:white;border:1px solid var(--line);border-radius:12px;padding:10px 8px;text-align:center;display:grid;gap:4px}
+.forecast-day strong{text-transform:capitalize;font-size:12px}
+.forecast-day span{font-size:12px}
+.forecast-day small{color:var(--muted);font-size:10px}
+.forecast-icon{font-size:22px!important}
+.weather-advice{display:grid;gap:7px;margin-top:10px}
+.weather-advice>div{background:#f7f6f1;border:1px solid var(--line);padding:10px 12px;border-radius:10px;font-size:13px}
+.timeline{position:relative;display:grid;gap:18px;max-width:900px}
+.timeline:before{content:'';position:absolute;left:62px;top:10px;bottom:10px;width:2px;background:var(--line)}
+.timeline-item{position:relative;display:grid;grid-template-columns:52px 150px 1fr;gap:18px;align-items:center}
+.timeline-date{font-size:12px;font-weight:700;color:var(--forest);text-align:right}
+.timeline-photo{border:0;padding:0;background:white;width:150px;height:110px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);z-index:1}
+.timeline-photo img{width:100%;height:100%;object-fit:cover}
+.timeline-copy{display:grid;gap:4px}
+.timeline-copy span{color:var(--muted);font-size:13px}
+@media(max-width:560px){
+  .forecast-strip{grid-template-columns:repeat(7,86px)}
+  .timeline:before{left:11px}
+  .timeline-item{grid-template-columns:22px 110px 1fr;gap:10px}
+  .timeline-date{writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;text-align:center}
+  .timeline-photo{width:110px;height:90px}
+  .timeline-copy{font-size:12px}
+}
