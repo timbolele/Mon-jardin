@@ -1,4 +1,4 @@
-const CACHE='mon-jardin-v2-shell';
+const CACHE='mon-jardin-v3-shell';
 const APP_SHELL=['./','./index.html','./styles.css','./app.js','./storage.js','./manifest.webmanifest','./icon.svg'];
 
 self.addEventListener('install',event=>{
