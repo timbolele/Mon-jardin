@@ -1,19 +1,25 @@
 # Mon Jardin
 
-Application personnelle de gestion des plantes, entièrement locale et responsive. Cette V1 permet de gérer les fiches plantes, photos, objectifs, observations, entretiens, rappels, historique, calendrier, recherche et sauvegardes.
+Application personnelle de gestion des plantes, responsive et installable en PWA.
 
-## Lancer l'application
+## V2 en préparation
 
-1. Ouvrez un terminal dans ce dossier.
-2. Lancez `python3 -m http.server 8000`.
-3. Ouvrez <http://localhost:8000> dans votre navigateur.
+La branche `v2-pwa-weather` ajoute :
 
-Aucune installation ni compte n'est nécessaire.
+- installation sur l'écran d'accueil (PWA) ;
+- fonctionnement hors ligne pour l'interface ;
+- stockage IndexedDB avec migration depuis le stockage local existant ;
+- météo locale à la demande via la localisation du navigateur ;
+- alertes froid/chaleur basées uniquement sur les seuils renseignés par l'utilisateur ;
+- fiches plantes enrichies : exposition, substrat, dernier rempotage, dimensions du pot et seuils météo ;
+- correction du jour affiché sur l'accueil.
 
-## Données et sauvegardes
+La météo utilise Open-Meteo. La position est transmise directement depuis le navigateur au service météo lors de la demande et n'est pas enregistrée dans le dépôt GitHub.
 
-Les données (photos comprises) sont enregistrées dans le stockage local du navigateur (`localStorage`), sous la clé `mon-jardin-v1`. Elles restent sur cet appareil et dans ce navigateur.
+## Données
 
-Utilisez la page **Sauvegarde** pour télécharger une copie JSON complète, la restaurer, ou exporter la liste des plantes au format CSV. Il est recommandé de télécharger régulièrement une sauvegarde et de la conserver dans vos documents ou sur un disque externe.
+Une copie de secours reste enregistrée dans `localStorage` sous la clé `mon-jardin-v1` pendant la migration. La source principale de la V2 est IndexedDB.
 
-> Effacer les données du navigateur efface aussi le jardin local. Faites une sauvegarde auparavant.
+Les exports JSON et CSV existants restent disponibles depuis la page **Sauvegarde**.
+
+> Avant tout changement important, conserver une sauvegarde JSON reste recommandé.
